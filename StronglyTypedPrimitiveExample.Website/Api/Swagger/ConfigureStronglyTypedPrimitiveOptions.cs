@@ -8,6 +8,5 @@ public class ConfigureStronglyTypedPrimitiveOptions : IConfigureOptions<SwaggerG
     public void Configure(SwaggerGenOptions options)
     {
         options.SchemaFilter<StronglyTypedPrimitiveSchemaFilter>();
-        options.UseAllOfToExtendReferenceSchemas();
     }
 }

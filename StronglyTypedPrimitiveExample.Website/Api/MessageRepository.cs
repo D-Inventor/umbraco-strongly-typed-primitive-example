@@ -20,6 +20,9 @@ public class MessageRepository
         => _collection.TryGetValue(id, out var result) ? result
         : null;
 
+    public MessageEntity? Find(Slug slug)
+        => _collection.Values.FirstOrDefault(message => message.Slug == slug);
+
     public IEnumerable<MessageEntity> Find(PersonID authorId)
         => _collection.Values.Where(message => message.AuthorId == authorId);
 }

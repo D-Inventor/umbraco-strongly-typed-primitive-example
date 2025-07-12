@@ -1,23 +1,20 @@
 using StronglyTypedPrimitiveExample.Website.Api;
 using StronglyTypedPrimitiveExample.Website.Api.Json;
+using StronglyTypedPrimitiveExample.Website.Api.ModelBinding;
 using StronglyTypedPrimitiveExample.Website.Api.Swagger;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.CreateUmbracoBuilder()
-    .AddBackOffice(mvc =>
-    {
-        mvc.AddJsonOptions(json =>
-        {
-            json.JsonSerializerOptions.Converters.Insert(0, new StronglyTypedPrimitiveJsonConverterFactory());
-        });
-    })
+    .AddBackOffice()
     .AddWebsite()
     .AddComposers()
     .Build();
 
 builder.Services.AddSingleton<MessageRepository>();
 builder.Services.ConfigureOptions<ConfigureStronglyTypedPrimitiveOptions>();
+builder.Services.ConfigureOptions<ConfigureStronglyTypedPrimitiveJsonOptions>();
+builder.Services.ConfigureOptions<ConfigureStronglyTypedPrimitiveModelBinding>();
 
 WebApplication app = builder.Build();
 
